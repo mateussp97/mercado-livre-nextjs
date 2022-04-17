@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { NextSeo } from "next-seo";
+import { Fragment } from "react";
 import { getItemById } from "../../services/items";
 
 const PageContainer = styled.section`
@@ -164,114 +166,140 @@ const PageWrapper = styled.main`
 
 export default function ProductDetails({ item }) {
   return (
-    <PageContainer>
-      <PageWrapper>
-        <div className="product-details-content">
-          <img src={item?.thumbnail} alt={item?.title} />
+    <Fragment>
+      <NextSeo
+        title={`Mercado Livre | ${item?.title}`}
+        description={
+          item?.description ||
+          "Compre produtos com Frete Grátis no mesmo dia no Mercado Livre Brasil. Encontre milhares de marcas e produtos a preços incríveis."
+        }
+        openGraph={{
+          title: `Mercado Livre | ${item?.title}`,
+          description:
+            item?.description ||
+            "Compre produtos com Frete Grátis no mesmo dia no Mercado Livre Brasil. Encontre milhares de marcas e produtos a preços incríveis.",
+          images: [
+            {
+              url: item?.thumbnail || "/mercado-livre-logo.jpg",
+              width: 1950,
+              height: 1950,
+              alt: item?.title || "Mercado Livre Logo",
+              type: "image/jpeg",
+            },
+          ],
+        }}
+      />
+      <PageContainer>
+        <PageWrapper>
+          <div className="product-details-content">
+            <img src={item?.thumbnail} alt={item?.title} />
 
-          <span className="product-details-informations">
-            <p className="product-details-condition-sold-quantity">
-              {item?.condition} | {item?.sold_quantity}{" "}
-              {item?.sold_quantity > 0 && item?.sold_quantity > 1
-                ? "vendidos"
-                : "vendido"}
-            </p>
-
-            <p className="product-details-title">{item?.title}</p>
-
-            <span className="product-details-price-wrapper">
-              <p className="product-details-price">
-                {
-                  item?.price
-                    .toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: item?.currency_id,
-                      minimumFractionDigits: 2,
-                    })
-                    .split(",")[0]
-                }
+            <span className="product-details-informations">
+              <p className="product-details-condition-sold-quantity">
+                {item?.condition} | {item?.sold_quantity}{" "}
+                {item?.sold_quantity > 0 && item?.sold_quantity > 1
+                  ? "vendidos"
+                  : "vendido"}
               </p>
-              <p className="product-details-fraction">
-                {
-                  item?.price
-                    .toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: item?.currency_id,
-                      minimumFractionDigits: 2,
-                    })
-                    .split(",")[1]
-                }
-              </p>
+
+              <p className="product-details-title">{item?.title}</p>
+
+              <span className="product-details-price-wrapper">
+                <p className="product-details-price">
+                  {
+                    item?.price
+                      .toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: item?.currency_id,
+                        minimumFractionDigits: 2,
+                      })
+                      .split(",")[0]
+                  }
+                </p>
+                <p className="product-details-fraction">
+                  {
+                    item?.price
+                      .toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: item?.currency_id,
+                        minimumFractionDigits: 2,
+                      })
+                      .split(",")[1]
+                  }
+                </p>
+              </span>
+
+              <a
+                href={item?.permalink}
+                target="_blank"
+                rel="noreferrer"
+                className="product-details-btn"
+              >
+                Comprar ahora
+              </a>
+
+              <div className="product-details-about-product">
+                <strong>Lo que tenés que saber de este producto</strong>
+
+                <ul>
+                  <li>
+                    {item?.accepts_mercadopago
+                      ? "Acepta mercadopago"
+                      : "No acepta mercadopago"}
+                  </li>
+
+                  {item?.shipping.free_shipping && <li>Envío gratuito</li>}
+
+                  {item?.warranty && <li>{item?.warranty}</li>}
+                </ul>
+              </div>
             </span>
-
-            <a
-              href={item?.permalink}
-              target="_blank"
-              rel="noreferrer"
-              className="product-details-btn"
-            >
-              Comprar ahora
-            </a>
-
-            <div className="product-details-about-product">
-              <strong>Lo que tenés que saber de este producto</strong>
-
-              <ul>
-                <li>
-                  {item?.accepts_mercadopago
-                    ? "Acepta mercadopago"
-                    : "No acepta mercadopago"}
-                </li>
-
-                {item?.shipping.free_shipping && <li>Envío gratuito</li>}
-
-                {item?.warranty && <li>{item?.warranty}</li>}
-              </ul>
-            </div>
-          </span>
-        </div>
-
-        <div className="product-details-section">
-          <h4 className="product-details-section-title">
-            Descripción del producto
-          </h4>
-
-          <div className="product-details-section-list">
-            <p className="product-details-section-item">{item?.description}</p>
           </div>
-        </div>
 
-        <div className="product-details-section">
-          <h4 className="product-details-section-title">
-            Información del vendedor
-          </h4>
+          <div className="product-details-section">
+            <h4 className="product-details-section-title">
+              Descripción del producto
+            </h4>
 
-          <div className="product-details-section-list">
-            <p className="product-details-section-item">
-              <strong>Ciudad:</strong> {item?.seller_address.city.name}
-            </p>
-            <p className="product-details-section-item">
-              <strong>Estado:</strong> {item?.seller_address.state.name}
-            </p>
-            <p className="product-details-section-item">
-              <strong>País:</strong> {item?.seller_address.country.name}
-            </p>
-          </div>
-        </div>
-
-        <div className="product-details-section">
-          <h4 className="product-details-section-title">Características</h4>
-
-          <div className="product-details-section-list">
-            {item?.attributes?.map((attribute) => (
-              <p key={attribute.id} className="product-details-section-item">
-                <strong>{attribute.name}:</strong> {attribute.value_name}
+            <div className="product-details-section-list">
+              <p className="product-details-section-item">
+                {item?.description}
               </p>
-            ))}
+            </div>
           </div>
-        </div>
-      </PageWrapper>
-    </PageContainer>
+
+          <div className="product-details-section">
+            <h4 className="product-details-section-title">
+              Información del vendedor
+            </h4>
+
+            <div className="product-details-section-list">
+              <p className="product-details-section-item">
+                <strong>Ciudad:</strong> {item?.seller_address.city.name}
+              </p>
+              <p className="product-details-section-item">
+                <strong>Estado:</strong> {item?.seller_address.state.name}
+              </p>
+              <p className="product-details-section-item">
+                <strong>País:</strong> {item?.seller_address.country.name}
+              </p>
+            </div>
+          </div>
+
+          <div className="product-details-section">
+            <h4 className="product-details-section-title">Características</h4>
+
+            <div className="product-details-section-list">
+              {item?.attributes?.map((attribute) => (
+                <p key={attribute.id} className="product-details-section-item">
+                  <strong>{attribute.name}:</strong> {attribute.value_name}
+                </p>
+              ))}
+            </div>
+          </div>
+        </PageWrapper>
+      </PageContainer>
+    </Fragment>
   );
 }
 

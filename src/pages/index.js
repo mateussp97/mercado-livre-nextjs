@@ -33,6 +33,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const items = await getItems(router.query.search);
+      console.log(items);
       setItems(items);
     };
 

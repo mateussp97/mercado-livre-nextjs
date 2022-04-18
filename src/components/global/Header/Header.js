@@ -9,7 +9,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <SC.HeaderContainer>
+    <SC.HeaderContainer data-testid="header-container">
       <SC.HeaderWrapper>
         <Link href="/">
           <img
@@ -20,12 +20,16 @@ export default function Header() {
         </Link>
         <span className="input-wrapper">
           <input
+            role="search"
             type="text"
             placeholder="Buscar productos, marcas y más..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button onClick={() => router.push(`/?search=${search}`)}>
+          <button
+            role="button"
+            onClick={() => router.push(`/?search=${search}`)}
+          >
             <FiSearch />
           </button>
         </span>

@@ -15,7 +15,7 @@ export default function ProductCard({
 }) {
   return (
     <Link href={`/items/${id}`}>
-      <SC.ProductCardContainer>
+      <SC.ProductCardContainer data-testid="product-card-container">
         <img className="product-picture" src={picture} alt={title} />
         <div className="product-informations">
           <span className="product-status-wrapper">

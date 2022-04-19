@@ -12,9 +12,9 @@ A description of what is expected and what I marked as I could possibly do.
 
 - [x] Product Detail
 
-- [x] Search endpoint
+- [] Search endpoint
 
-- [x] Product Detail endpoint
+- [] Product Detail endpoint
 
 ### Personal Bonus Tasks
 

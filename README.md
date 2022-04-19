@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mercado Livre Front-end Challenge
 
-## Getting Started
+## Functional description of the application.
 
-First, run the development server:
+A description of what is expected and what I marked as I could possibly do.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Requisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [x] Search Box
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- [x] Results List
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- [x] Product Detail
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [x] Search endpoint
 
-## Learn More
+- [x] Product Detail endpoint
 
-To learn more about Next.js, take a look at the following resources:
+### Personal Bonus Tasks
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [x] Use some modern css solution (SASS, styled-components, emotion);
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [x] SEO using next-seo;
 
-## Deploy on Vercel
+- [x] Front-end a little different than usual, giving a slightly better feel to what was requested. Based on the style of the [Mercado Livre](https://www.mercadolivre.com.br/) website;
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [x] Do something nice!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Stack
+
+It will be used:
+
+- [ReactJS](https://reactjs.org/): A modern web development framework;
+
+- [Next.js](https://nextjs.org): A React-based server-side rendering framework;
+
+- [next-seo](https://www.npmjs.com/package/next-seo): A plugin for SEO management made for Next.js projects;
+
+- [styled-Components](https://www.styled-components.com/): Styles CSS as a component (used too for theming);
+
+- [Jest](https://jestjs.io/): A JavaScript testing framework;
+
+## How to start
+
+- Run `yarn` to install all dependencies, and `yarn dev` to run the project on localhost:3000;
